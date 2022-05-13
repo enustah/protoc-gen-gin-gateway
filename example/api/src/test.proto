@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+package TestSvc;
+option go_package = ".;go_grpc";
+import "gin_gateway_option.proto";
+
+option (extend_import) ={
+  import:[
+    "github.com/enustah/protoc-gen-gin-gateway/example/go_grpc"
+  ]
+};
+
+option (gin_gateway_package_name) = "gateway";
+
+
+service TestSvc {
+
+  option(svc_gen_info) = {
+    generate_swag: true,
+    swag_tag: "测试服务",
+    //需要实现
+    /*
+    func getTestSvcCli()test_svc.TestSvcServer{
+
+    }
+    */
+    get_grpc_cli_func: "getTestSvcCli",
+    //需要实现
+    /*
+    func testSvcHandle[REQ, RESP any, handlerF func(context.Context, REQ) (RESP, error)](
+    	ctx *gin.Context, req REQ, handler handlerF, path string, err error) {
+
+    }
+    */
+    handler_func: "testSvcHandle",
+    //额外注释 添加到每个生成函数的上方注释
+    method_extend_comment: [
+      "test svc 1 method extend comment",
+      "test svc 2 method extend comment"
+
+    ]
+  };
+
+
+  rpc Method1(Method1Req) returns(Method1Resp){
+    option (method_gen_info) = {
+      path:"/test/m1",
+      method:"GET",
+      swag_summary: "方法1",
+      swag_resp_obj: "util.Resp{data=%s}",
+      //额外注释 添加到生成函数的上方注释
+      extend_comment: [
+        "test 1 extend comment",
+        "test 2 extend comment"
+
+      ]
+    };
+  }
+
+  rpc Method2(Method2Req) returns(Method2Resp){
+    option (method_gen_info) = {
+      path:"/test/m2",
+      method:"POST",
+      swag_summary: "方法2",
+      swag_resp_obj: "util.Resp{data=%s}",
+      //这里可以添加额外的swag注释
+      extend_comment: [
+        "aaaaaffff",
+        "@Param session header string true \"auth header\""
+
+      ]
+    };
+
+  }
+
+  rpc Method3(Method2Req) returns(Method2Resp){
+
+  }
+
+}
+
+message Method1Req{
+
+}
+
+message Method1Resp{
+
+}
+
+message Method2Req{
+
+}
+
+message Method2Resp{
+
+}

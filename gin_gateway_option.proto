@@ -1,0 +1,38 @@
+syntax = "proto3";
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/enustah/protoc-gen-gin-gateway/gin_gateway";
+
+message ExtendImport {
+  repeated string import = 1;
+}
+
+extend google.protobuf.FileOptions {
+  optional  ExtendImport extend_import = 8964;
+  string gin_gateway_package_name = 8965;
+}
+
+message ServiceGenInfo{
+  string get_grpc_cli_func = 1;
+  string handler_func = 2;
+  bool generate_swag = 4;
+  string swag_tag = 5;
+  repeated string method_extend_comment = 6;
+}
+
+message MethodGenInfo {
+  string path = 1;
+  string method = 2;
+  string swag_summary  = 3;
+  repeated string extend_comment = 4;
+  //example util.CommResp{data=%s}}
+  string swag_resp_obj  = 5;
+}
+
+extend google.protobuf.MethodOptions{
+  optional MethodGenInfo method_gen_info = 8964;
+}
+
+extend google.protobuf.ServiceOptions{
+  optional ServiceGenInfo svc_gen_info = 8964;
+}
