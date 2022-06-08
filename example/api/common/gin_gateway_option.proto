@@ -15,18 +15,19 @@ extend google.protobuf.FileOptions {
 message ServiceGenInfo{
   string get_grpc_cli_func = 1;
   string handler_func = 2;
-  bool generate_swag = 4;
-  string swag_tag = 5;
+  bool generate_swag = 3;
+  string swag_tag = 4;
+  string swag_path_prefix = 5;
   repeated string method_extend_comment = 6;
 }
 
 message MethodGenInfo {
   string path = 1;
   string method = 2;
-  string swag_summary  = 3;
+  string swag_summary = 3;
   repeated string extend_comment = 4;
   //example util.CommResp{data=%s}}
-  string swag_resp_obj  = 5;
+  string swag_resp_obj = 5;
 }
 
 extend google.protobuf.MethodOptions{

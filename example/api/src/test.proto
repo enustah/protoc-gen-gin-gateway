@@ -17,6 +17,7 @@ service TestSvc {
 
   option(svc_gen_info) = {
     generate_swag: true,
+    swag_path_prefix: "/prefix",
     swag_tag: "测试服务",
     //需要实现
     /*

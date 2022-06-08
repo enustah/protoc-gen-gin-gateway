@@ -43,6 +43,8 @@ service TestSvc {
   option(svc_gen_info) = {
     //是否生成swag注释, 如果生成,swag_tag不能空
     generate_swag: true,
+    // swagger route 里的路径前缀 完整路径是 ${swag_path_prefix}${path}
+    swag_path_prefix: "/prefix",
     // swag 注释的tag
     swag_tag: "测试服务", 
     //这个是获取grpc客户端的函数,不能有参数 需要自己实现

@@ -24,7 +24,7 @@ func RegisterTestSvcTestSvcHandler(group *gin.RouterGroup) {
 // @Produce application/json
 // @Param data query go_grpc.Method1Req true "go_grpc.Method1Req"
 // @success 200 {object} util.Resp{data=go_grpc.Method1Resp} "返回结果"
-// @Router /test/m1 [GET]
+// @Router /prefix/test/m1 [GET]
 // test svc 1 method extend comment
 // test svc 2 method extend comment
 // test 1 extend comment
@@ -41,7 +41,7 @@ func TestSvcTestSvcMethod1GinHandler(ctx *gin.Context) {
 // @Produce application/json
 // @Param data body go_grpc.Method2Req true "go_grpc.Method2Req"
 // @success 200 {object} util.Resp{data=go_grpc.Method2Resp} "返回结果"
-// @Router /test/m2 [POST]
+// @Router /prefix/test/m2 [POST]
 // test svc 1 method extend comment
 // test svc 2 method extend comment
 // aaaaaffff

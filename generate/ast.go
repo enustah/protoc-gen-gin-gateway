@@ -136,7 +136,7 @@ const swagComment = `// @Tags {{.Tag}}
 // @Produce application/json
 // @Param data {{.ParamIn}} {{.ReqStruct}} true "{{.ReqStruct}}"
 // @success 200 {object} {{.RespObj}} "返回结果"
-// @Router {{.Path}} [{{.Method}}]
+// @Router {{.Prefix}}{{.Path}} [{{.Method}}]
 `
 
 func (this *SvcGenerator) genSwagComment(m *protogen.Method) ([]string, error) {
@@ -146,6 +146,7 @@ func (this *SvcGenerator) genSwagComment(m *protogen.Method) ([]string, error) {
 		ParamIn   string
 		ReqStruct string
 		RespObj   string
+		Prefix    string
 		Path      string
 		Method    string
 	}
@@ -158,6 +159,7 @@ func (this *SvcGenerator) genSwagComment(m *protogen.Method) ([]string, error) {
 			ParamIn:   "",
 			ReqStruct: fmt.Sprintf("%s.%s", this.goPkgName, m.Input.Desc.Name()),
 			RespObj:   "",
+			Prefix:    svcGenInfo.SwagPathPrefix,
 			Path:      methodGenInfo.Path,
 			Method:    methodGenInfo.Method,
 		}
